@@ -1,66 +1,162 @@
-"""Se desea utilizar un lenguaje de programación  para
- desarrollar los algoritmos dados en clases, sobre el concepto
- de Cola Circular utilizando la estructura de datos tipo arreglo para implementarla.
- El programa debe presentar los siguientes menús, para que el usuario pueda escoger
- las operaciones deseadas"""
 import numpy as np
-array=np([],dtype=str)
-frente=0
-final=0
+
+# Tamaño de la estructura de datos
+TAM = 5
+
+# Arreglo para almacenar elementos
+array = np.empty(TAM, dtype=str)
+# Inicializar los índices para la cola y la cola circular
+frente = -1
+final = -1
+tope = -1
+
+# Función para mostrar el contenido del arreglo
 def recorrido():
     for i in array:
-        print("\n\t ___\n\t[", i, "]")
+        print(f"\n\t ___\n\t[{i}]")
 
-def Pila(opc,ele, tope):#Funcion de proyedcto 1
-  if opc==1:
-    tope+=1
-    array.append(ele)
-  elif opc==2:
-    array.pop()
-    tope-=1
-  elif opc==3:
-   recorrido()
 
-def Colas(opc,ele, frente,final):#Funcion de proyecto 2
+# Implementación de la pila
+def pilas(opc, ele):
+    global tope
+
+    # Opción 1: Insertar en la pila
     if opc == 1:
-        frente=0
-        final=0
-        array.insert(len(array)-1,ele)
-    if opc == 2:
-        array.insert(len(array)-1,ele)
-        final+=1
-    elif opc == 3:
-        array.remove(0)
-        frente-=1
-    elif opc == 4:
-     recorrido()
-    print("El frente: ",frente,"\nEl final: ",final)
-def ColaCircular(opc,ele,frente, final):#Funcion de proyecto 3
-    if opc == 1:
-        frente=0
-        final=0
-        array.insert(len(array)-1,ele)
+        if tope == TAM - 1:
+            print("La pila está llena, no se puede insertar más elementos.")
+        else:
+            tope += 1
+            array[tope] = ele
+            print(f"¡Elemento '{ele}' agregado correctamente a la pila!")
 
+    # Opción 2: Eliminar de la pila
     elif opc == 2:
-        array.remove(0)
-        frente-=1
-    elif opc == 3:
-      recorrido()
-            
-while True:
-    print("\n***************************************************\n\t\t\tMenu Principal\nOperaciones con estructuras de datos lineales\n\t\tIntegrantes del grupo:\n\n Alan Ricketts\n Isaac Vega\n**************************************************")
-    print("Escoja una de las opciones:\n\nPilas\n\n2.Colas\n\n3.Colas Circulares\n\n")
-    resp=input("\nIntroduzca la respuesta:\n")
-    #--------------------------------------------------------------------------------
-    while True:#Proyecto 1
-        print("Escoja una de las opciones:\n\n1.Insertar elementos a la Pila\n\n2.Eliminar elementos de la Pila\n\n3.Mostrar la Pila\n\n4.Retornar al menu principal")
-        resp=input("\n\nIntroduzca la respuesta:\n")
-    # --------------------------------------------------------------------------------
-    while True:#Proyecto 2
-        print("Escoja una de las opciones:\n\n1.Insertar elementos a la cola \n\n2.Eliminar elementos de la cola \n\n3.Mostrar la Cola \n\n4.Retornar al menu principal")
-        resp=input("\n\nIntroduzca la respuesta:\n")
+        if tope == -1:
+            print("No se puede realizar la eliminación, la pila está vacía.")
+        else:
+            print(f"¡Elemento '{array[tope]}' eliminado correctamente de la pila!")
+            array[tope] = ""  # Eliminar el elemento
+            tope -= 1
 
-    # --------------------------------------------------------------------------------
-    while True:#Proyecto 3
-        print("Escoja una de las opciones:\n\n1.Insertar elementos a la cola circular\n\n2.Eliminar elementos de la cola Circular\n\n3.Mostrar la Cola Circular\n\n4.Retornar al menu principal")
-        resp=input("\n\nIntroduzca la respuesta:\n")
+    # Opción 3: Mostrar la pila
+    elif opc == 3:
+        print("Elementos de la pila:")
+        recorrido()
+
+
+# Implementación de la cola
+def colas(opc):
+    global frente, final
+
+    # Opción 1: Insertar en la cola
+    if opc == 1:
+        ele = input("Ingrese el elemento para insertar en la cola:\n")
+        if (final + 1) % TAM == frente:
+            print("La cola está llena, no se puede insertar más elementos.")
+        else:
+            if frente == -1:  # Si la cola está vacía
+                frente = 0
+            final = (final + 1) % TAM
+            array[final] = ele
+            print(f"¡Elemento '{ele}' agregado correctamente a la cola!")
+
+    # Opción 2: Eliminar de la cola
+    elif opc == 2:
+        if frente == -1:
+            print("No se puede eliminar, la cola está vacía.")
+        else:
+            print(f"¡Elemento '{array[frente]}' eliminado correctamente de la cola!")
+            array[frente] = ""
+            if frente == final:
+                frente = final = -1
+            else:
+                frente = (frente + 1) % TAM
+
+    # Opción 3: Mostrar la cola
+    elif opc == 3:
+        print("Elementos de la cola:")
+        recorrido()
+
+
+# Implementación de la cola circular
+def cola_circular(opc):
+    global frente, final
+
+    # Opción 1: Insertar en la cola circular
+    if opc == 1:
+        ele = input("Ingrese el elemento para insertar en la cola circular:\n")
+        if (final + 1) % TAM == frente:
+            print("La cola circular está llena, no se puede insertar más elementos.")
+        else:
+            if frente == -1:  # Si la cola circular está vacía
+                frente = 0
+            final = (final + 1) % TAM
+            array[final] = ele
+            print(f"¡Elemento '{ele}' agregado correctamente a la cola circular!")
+
+    # Opción 2: Eliminar de la cola circular
+    elif opc == 2:
+        if frente == -1:
+            print("No se puede eliminar, la cola circular está vacía.")
+        else:
+            print(f"¡Elemento '{array[frente]}' eliminado correctamente de la cola circular!")
+            array[frente] = ""
+            if frente == final:
+                frente = final = -1
+            else:
+                frente = (frente + 1) % TAM
+
+    # Opción 3: Mostrar la cola circular
+    elif opc == 3:
+        print("Elementos de la cola circular:")
+        recorrido()
+
+
+# Programa principal con menús de operación
+while True:
+    print("\n***************************************************\n\t\t\tMenú Principal\nOperaciones con estructuras de datos lineales\n\t\tIntegrantes del grupo:\n\n Alan Ricketts\n Isaac Vega\n**************************************************")
+    print("Escoja una de las opciones:\n\n1. Pilas\n\n2. Colas\n\n3. Colas Circulares\n\n4. Salir")
+    resp = input("\nIntroduzca la respuesta:\n")
+
+    # Menú de Pilas
+    if resp == "1":
+        while True:
+            print("Escoja una de las opciones:\n\n1. Insertar elementos a la Pila\n2. Eliminar elementos de la Pila\n3. Mostrar la Pila\n4. Retornar al menú principal")
+            resp_pila = input("\nIntroduzca la respuesta:\n")
+            if resp_pila == "1":
+                ele = input("Ingrese el elemento para agregar a la pila:\n")
+                pilas(1, ele)
+            elif resp_pila == "2":
+                pilas(2, None)
+            elif resp_pila == "3":
+                pilas(3, None)
+            elif resp_pila == "4":
+                break
+
+    # Menú de Colas
+    elif resp == "2":
+        while True:
+            print("Escoja una de las opciones:\n\n1. Insertar elementos a la Cola\n2. Eliminar elementos de la Cola\n3. Mostrar la Cola\n4. Retornar al menú principal")
+            resp_cola = input("\nIntroduzca la respuesta:\n")
+            if resp_cola in ["1", "2", "3"]:
+                colas(int(resp_cola))
+            elif resp_cola == "4":
+                break
+
+    # Menú de Colas Circulares
+    elif resp == "3":
+        while True:
+            print("Escoja una de las opciones:\n\n1. Insertar elementos a la Cola Circular\n2. Eliminar elementos de la Cola Circular\n3. Mostrar la Cola Circular\n4. Retornar al menú principal")
+            resp_cola_circular = input("\nIntroduzca la respuesta:\n")
+            if resp_cola_circular in ["1", "2", "3"]:
+                cola_circular(int(resp_cola_circular))
+            elif resp_cola_circular == "4":
+                break
+
+    # Salir del programa
+    elif resp == "4":
+        print("Gracias por utilizar el programa.")
+        break
+
+    else:
+        print("Opción inválida. Por favor, elija una opción correcta.")
