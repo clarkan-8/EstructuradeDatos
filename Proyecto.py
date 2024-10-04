@@ -13,7 +13,7 @@ tope = -1
 # Función para mostrar el contenido del arreglo
 def recorrido():
     for i in array:
-        print(f"\n\t ___\n\t[{i}]")
+        print(f"\n\t____\n\t| {i} |")
 
 
 # Implementación de la pila
@@ -42,6 +42,7 @@ def pilas(opc, ele):
     elif opc == 3:
         print("Elementos de la pila:")
         recorrido()
+        print("Tope: ",tope)
 
 
 # Implementación de la cola
@@ -76,7 +77,7 @@ def colas(opc):
     elif opc == 3:
         print("Elementos de la cola:")
         recorrido()
-
+    print("Frente: ", frente,"\nFinal: ", final)
 
 # Implementación de la cola circular
 def cola_circular(opc):
@@ -110,6 +111,7 @@ def cola_circular(opc):
     elif opc == 3:
         print("Elementos de la cola circular:")
         recorrido()
+        print("Frente: ", frente, "\nFinal: ", final)
 
 
 # Programa principal con menús de operación
