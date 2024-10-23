@@ -13,7 +13,7 @@ tope = -1
 # Función para mostrar el contenido del arreglo
 def recorrido():
     for i in array:
-        print(f"\n\t____\n\t| {i} |")
+        print(f"\n\t____\n\t| {i} |\n")
 
 
 # Implementación de la pila
@@ -109,14 +109,15 @@ def cola_circular(opc):
 
     # Opción 3: Mostrar la cola circular
     elif opc == 3:
+
         print("Elementos de la cola circular:")
         recorrido()
         print("Frente: ", frente, "\nFinal: ", final)
 
-
+#------------------------------!Main!-----------------------------------------------------------------
 # Programa principal con menús de operación
 while True:
-    print("\n***************************************************\n\t\t\tMenú Principal\nOperaciones con estructuras de datos lineales\n\t\tIntegrantes del grupo:\n\n Alan Ricketts\n Isaac Vega\n**************************************************")
+    print("\n***************************************************\n\t\t\tMenú Principal\nOperaciones con estructuras de datos lineales\nIntegrantes del grupo:\n\n Alan Ricketts\n Isaac Vega\n**************************************************")
     print("Escoja una de las opciones:\n\n1. Pilas\n\n2. Colas\n\n3. Colas Circulares\n\n4. Salir")
     resp = input("\nIntroduzca la respuesta:\n")
 
@@ -134,6 +135,8 @@ while True:
                 pilas(3, None)
             elif resp_pila == "4":
                 break
+            elif int(resp_pila) > 4:
+                print("Opción invalida")
 
     # Menú de Colas
     elif resp == "2":
@@ -144,6 +147,8 @@ while True:
                 colas(int(resp_cola))
             elif resp_cola == "4":
                 break
+            elif int(resp_cola)>4:
+                print("Opción invalida")
 
     # Menú de Colas Circulares
     elif resp == "3":
@@ -154,10 +159,12 @@ while True:
                 cola_circular(int(resp_cola_circular))
             elif resp_cola_circular == "4":
                 break
+            elif int(resp_cola_circular) > 4:
+                print("Opción invalida")
 
     # Salir del programa
     elif resp == "4":
-        print("Gracias por utilizar el programa.")
+        print("Gracias por utilizar el programa, nos vemos pronto.")
         break
 
     else:
