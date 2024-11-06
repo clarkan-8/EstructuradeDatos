@@ -54,7 +54,9 @@ def colas(opc):
         ele = input("Ingrese el elemento para insertar en la cola:\n")
         if (final + 1) % TAM == frente:
             print("La cola está llena, no se puede insertar más elementos.")
-        else:
+        if frente>0 and final==4:
+            print("¡no se pueden insertar elementos!")
+        elif final!=4:
             if frente == -1:  # Si la cola está vacía
                 frente = 0
             final = (final + 1) % TAM
